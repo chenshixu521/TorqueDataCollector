@@ -16,5 +16,8 @@ namespace TorqueDataCollector.Models
         public DateTime Time { get; set; }
         //是否合格
         public bool IsQualified { get; set; }
+        //角度值
+        public double Angle { get; set; }
+
     }
 }

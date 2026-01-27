@@ -21,14 +21,15 @@ namespace TorqueDataCollector.Services
 
                 string sql = @"
 INSERT INTO TorqueRecord
-(MotorQr, TorqueValue, IsQualified, Time)
+(MotorQr, TorqueValue, Angle, IsQualified, Time)
 VALUES
-(@MotorQr, @TorqueValue, @IsQualified, @Time)";
+(@MotorQr, @TorqueValue, @Angle, @IsQualified, @Time)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@MotorQr", record.MotorQr);
                     cmd.Parameters.AddWithValue("@TorqueValue", record.TorqueValue);
+                    cmd.Parameters.AddWithValue("@Angle", record.Angle);
                     cmd.Parameters.AddWithValue("@IsQualified", record.IsQualified);
                     cmd.Parameters.AddWithValue("@Time", record.Time);
 

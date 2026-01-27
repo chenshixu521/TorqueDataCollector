@@ -98,6 +98,7 @@ namespace TorqueDataCollector
             Random r = new Random();
             double torque = Math.Round(r.NextDouble() * 30, 2);
 
+
             _torqueCollectService.ReceiveTorque(torque);
         }
     }

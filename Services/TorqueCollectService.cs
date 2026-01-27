@@ -20,12 +20,16 @@ namespace TorqueDataCollector.Services
             }
             // 扭矩合格判定
             bool qualified = CheckTorqueQualified(torqueValue);
+            //生成随机角度
+            Random r = new Random();
+            double angle = Math.Round(r.NextDouble() * 360, 2);
 
             //生成扭矩记录
             TorqueRecord record = new TorqueRecord
             {
                 MotorQr = Systemstate.CurrentMotorQr,
                 TorqueValue = torqueValue,
+                Angle = angle,
                 IsQualified = qualified,
                 Time = DateTime.Now
             };
