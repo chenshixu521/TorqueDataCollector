@@ -103,9 +103,6 @@ namespace TorqueDataCollector
             _torqueCollectService.ReceiveTorque(torque);
         }
 
-        private void txtMotorQr_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }
