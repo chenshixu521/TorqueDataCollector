@@ -64,9 +64,10 @@ namespace TorqueDataCollector.Services
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                System.Diagnostics.Debug.WriteLine(
+            $"[ScanSerialService] 串口接收异常: {ex.Message}");
             }
         }
     }
