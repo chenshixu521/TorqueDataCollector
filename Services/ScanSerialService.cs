@@ -50,7 +50,9 @@ namespace TorqueDataCollector.Services
             try
             {
                 string data = _serialPort.ReadExisting();
-                data = data.Trim();
+                if (string.IsNullOrWhiteSpace(data))
+                    return;
+
                 _buffer.Append(data);
 
                 if (data.Contains("\n") || data.Contains("\r"))
