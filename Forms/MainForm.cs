@@ -53,6 +53,7 @@ namespace TorqueDataCollector
                 string result =
                     $"{record.Time:HH:mm:ss} | " +
                     $"扭矩：{record.TorqueValue} Nm | " +
+                    $"角度：{record.Angle} ° | " +
                     (record.IsQualified ? "合格" : "不合格");
 
                 lstTorque.Items.Add(result);
