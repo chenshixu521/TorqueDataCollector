@@ -8,6 +8,7 @@ namespace TorqueDataCollector.Services
     internal class ScanSerialService
     {
         private SerialPort _serialPort;
+        private StringBuilder _buffer = new StringBuilder();
 
         //扫码完成事件
         public event Action<string> OnScanReceived;
@@ -50,10 +51,17 @@ namespace TorqueDataCollector.Services
             {
                 string data = _serialPort.ReadExisting();
                 data = data.Trim();
+                _buffer.Append(data);
 
-                if (!string.IsNullOrEmpty(data))
+                if (data.Contains("\n") || data.Contains("\r"))
                 {
-                    OnScanReceived?.Invoke(data);
+                    string qr = _buffer.ToString().Trim();
+                    _buffer.Clear();
+
+                    if (!string.IsNullOrEmpty(qr))
+                    {
+                        OnScanReceived?.Invoke(qr);
+                    }
                 }
             }
             catch
