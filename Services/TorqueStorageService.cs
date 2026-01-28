@@ -34,7 +34,8 @@ namespace TorqueDataCollector.Services
                 $"{record.Time:yyyy-MM-dd HH:mm:ss}," +
                 $"{record.MotorQr}," +
                 $"{record.TorqueValue}," +
-                $"{(record.IsQualified ? "合格" : "不合格")}";
+                $"{(record.IsQualified ? "合格" : "不合格")},"+
+                $"{record.Angle}°";
 
             File.AppendAllText(_filePath, line + "\r\n");
         }
