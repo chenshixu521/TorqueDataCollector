@@ -103,6 +103,6 @@ namespace TorqueDataCollector
             _torqueCollectService.ReceiveTorque(torque);
         }
 
-     
+    
     }
 }

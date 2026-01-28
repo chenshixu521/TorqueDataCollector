@@ -53,7 +53,6 @@
             this.txtMotorQr.Name = "txtMotorQr";
             this.txtMotorQr.Size = new System.Drawing.Size(278, 28);
             this.txtMotorQr.TabIndex = 1;
-            this.txtMotorQr.TextChanged += new System.EventHandler(this.txtMotorQr_TextChanged);
             // 
             // btnBindMotor
             // 
@@ -92,7 +91,7 @@
             this.lstTorque.Name = "lstTorque";
             this.lstTorque.Size = new System.Drawing.Size(764, 184);
             this.lstTorque.TabIndex = 5;
-            // 
+     
             // btnMockTorque
             // 
             this.btnMockTorque.Location = new System.Drawing.Point(513, 34);
