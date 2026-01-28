@@ -49,14 +49,15 @@
             // 
             // txtMotorQr
             // 
-            this.txtMotorQr.Location = new System.Drawing.Point(24, 89);
+            this.txtMotorQr.Location = new System.Drawing.Point(24, 100);
             this.txtMotorQr.Name = "txtMotorQr";
-            this.txtMotorQr.Size = new System.Drawing.Size(331, 28);
+            this.txtMotorQr.Size = new System.Drawing.Size(278, 28);
             this.txtMotorQr.TabIndex = 1;
+            this.txtMotorQr.TextChanged += new System.EventHandler(this.txtMotorQr_TextChanged);
             // 
             // btnBindMotor
             // 
-            this.btnBindMotor.Location = new System.Drawing.Point(175, 12);
+            this.btnBindMotor.Location = new System.Drawing.Point(24, 150);
             this.btnBindMotor.Name = "btnBindMotor";
             this.btnBindMotor.Size = new System.Drawing.Size(127, 32);
             this.btnBindMotor.TabIndex = 2;
@@ -75,9 +76,9 @@
             // 
             // btnMockScan
             // 
-            this.btnMockScan.Location = new System.Drawing.Point(201, 145);
+            this.btnMockScan.Location = new System.Drawing.Point(661, 34);
             this.btnMockScan.Name = "btnMockScan";
-            this.btnMockScan.Size = new System.Drawing.Size(113, 32);
+            this.btnMockScan.Size = new System.Drawing.Size(113, 42);
             this.btnMockScan.TabIndex = 4;
             this.btnMockScan.Text = "模拟扫码";
             this.btnMockScan.UseVisualStyleBackColor = true;
@@ -87,14 +88,14 @@
             // 
             this.lstTorque.FormattingEnabled = true;
             this.lstTorque.ItemHeight = 18;
-            this.lstTorque.Location = new System.Drawing.Point(428, 24);
+            this.lstTorque.Location = new System.Drawing.Point(24, 226);
             this.lstTorque.Name = "lstTorque";
-            this.lstTorque.Size = new System.Drawing.Size(360, 328);
+            this.lstTorque.Size = new System.Drawing.Size(764, 184);
             this.lstTorque.TabIndex = 5;
             // 
             // btnMockTorque
             // 
-            this.btnMockTorque.Location = new System.Drawing.Point(39, 140);
+            this.btnMockTorque.Location = new System.Drawing.Point(513, 34);
             this.btnMockTorque.Name = "btnMockTorque";
             this.btnMockTorque.Size = new System.Drawing.Size(113, 42);
             this.btnMockTorque.TabIndex = 6;
