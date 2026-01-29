@@ -1,15 +1,20 @@
 ﻿using System;
 using TorqueDataCollector.Models;
 using TorqueDataCollector.Utils;
+using System.Configuration;
+
 
 namespace TorqueDataCollector.Services
 {
     public class TorqueCollectService
     {
+        private readonly double _torqueMin;
+        private readonly double _torqueMax;
+
         // 扭矩数据处理完成事件
         public event Action<TorqueRecord> OnTorqueProcessed;
 
-
+         
         public void ReceiveTorque(double torqueValue)
         {
             //是否已经绑定电机
@@ -37,11 +42,19 @@ namespace TorqueDataCollector.Services
             OnTorqueProcessed?.Invoke(record);
         }
 
+        public TorqueCollectService()
+        {
+            if (!double.TryParse(ConfigurationManager.AppSettings["TorqueMin"], out _torqueMin))
+                _torqueMin = 10;
+
+            if (!double.TryParse(ConfigurationManager.AppSettings["TorqueMax"], out _torqueMax))
+                _torqueMax = 20;
+        }
+
         private bool CheckTorqueQualified(double torque)
         {
-            double min = 10.0;
-            double max = 20.0;
-            return torque >= min && torque <= max;
+            return torque >= _torqueMin && torque <= _torqueMax;
         }
+
     }
 }

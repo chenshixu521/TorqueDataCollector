@@ -35,6 +35,7 @@
             this.btnMockScan = new System.Windows.Forms.Button();
             this.lstTorque = new System.Windows.Forms.ListBox();
             this.btnMockTorque = new System.Windows.Forms.Button();
+            this.lblScanStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -102,11 +103,21 @@
             this.btnMockTorque.UseVisualStyleBackColor = true;
             this.btnMockTorque.Click += new System.EventHandler(this.btnMockTorque_Click);
             // 
+            // lblScanStatus
+            // 
+            this.lblScanStatus.AutoSize = true;
+            this.lblScanStatus.Location = new System.Drawing.Point(186, 157);
+            this.lblScanStatus.Name = "lblScanStatus";
+            this.lblScanStatus.Size = new System.Drawing.Size(170, 18);
+            this.lblScanStatus.TabIndex = 7;
+            this.lblScanStatus.Text = "扫码枪状态：未连接";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblScanStatus);
             this.Controls.Add(this.btnMockTorque);
             this.Controls.Add(this.lstTorque);
             this.Controls.Add(this.btnMockScan);
@@ -116,6 +127,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +142,7 @@
         private System.Windows.Forms.Button btnMockScan;
         private System.Windows.Forms.ListBox lstTorque;
         private System.Windows.Forms.Button btnMockTorque;
+        private System.Windows.Forms.Label lblScanStatus;
     }
 }
 

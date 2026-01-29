@@ -21,7 +21,7 @@ namespace TorqueDataCollector.Services
             }
         }
         //打开串口：创建并配置串口
-        public void Open(string portName, int baudRate = 9600)
+        public void Open(string portName, int baudRate)
         {
             if (_serialPort != null && _serialPort.IsOpen)
                 return;

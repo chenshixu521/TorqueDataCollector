@@ -28,6 +28,11 @@ namespace TorqueDataCollector
             InitializeComponent();
             _scanService = new ScanSerialService();
             _scanService.OnScanReceived += ScanService_OnScanReceived;
+
+            // 从 App.config 读取串口配置
+            string portName = ConfigurationManager.AppSettings["ScanPortName"];
+            int baudRate = int.Parse(ConfigurationManager.AppSettings["ScanBaudRate"]);
+
             _torqueCollectService = new TorqueCollectService();
             _torqueCollectService.OnTorqueProcessed += TorqueCollectService_OnTorqueProcessed;
             _csvStorage = new TorqueStorageService();
@@ -35,6 +40,7 @@ namespace TorqueDataCollector
     ConfigurationManager.ConnectionStrings["TorqueDb"].ConnectionString;
 
             _sqlStorage = new TorqueSqlStorageService(connStr);
+
         }
         private void ScanService_OnScanReceived(string qr)
         {
@@ -103,6 +109,28 @@ namespace TorqueDataCollector
             _torqueCollectService.ReceiveTorque(torque);
         }
 
-    
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string portName = ConfigurationManager.AppSettings["ScanPortName"];
+                string baud = ConfigurationManager.AppSettings["ScanBaudRate"];
+
+                if (!int.TryParse(baud, out int baudRate))
+                {
+                    MessageBox.Show("串口波特率配置错误");
+                    return;
+                }
+
+                _scanService.Open(portName, baudRate);
+                lblScanStatus.Text = $"扫码枪已连接（{portName}）";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "扫码枪串口打开失败，请检查端口号是否正确或设备是否插入。\n\n" + ex.Message,
+                    "串口错误");
+            }
+        }
     }
 }
