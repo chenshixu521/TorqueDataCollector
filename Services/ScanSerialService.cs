@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.IO.Ports;
+using System.IO;
 
 
 namespace TorqueDataCollector.Services
@@ -68,8 +69,19 @@ namespace TorqueDataCollector.Services
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(
-            $"[ScanSerialService] 串口接收异常: {ex.Message}");
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"[ScanSerialService] 串口接收异常: {ex}");
+
+                    File.AppendAllText(
+                        "scan_error.log",
+                        $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {ex}\r\n");
+                }
+                catch
+                {
+                    // 保证串口线程永不崩
+                }
             }
         }
     }
