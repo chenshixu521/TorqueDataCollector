@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.IO.Ports;
 using System.IO;
+using System.IO.Ports;
+using System.Text;
+using System.Windows.Forms;
 
 
 namespace TorqueDataCollector.Services
@@ -73,7 +74,7 @@ namespace TorqueDataCollector.Services
                 {
                     System.Diagnostics.Debug.WriteLine(
                         $"[ScanSerialService] 串口接收异常: {ex}");
-
+                    
                     File.AppendAllText(
                         "scan_error.log",
                         $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {ex}\r\n");

@@ -28,11 +28,6 @@ namespace TorqueDataCollector
             InitializeComponent();
             _scanService = new ScanSerialService();
             _scanService.OnScanReceived += ScanService_OnScanReceived;
-
-            // 从 App.config 读取串口配置
-            string portName = ConfigurationManager.AppSettings["ScanPortName"];
-            int baudRate = int.Parse(ConfigurationManager.AppSettings["ScanBaudRate"]);
-
             _torqueCollectService = new TorqueCollectService();
             _torqueCollectService.OnTorqueProcessed += TorqueCollectService_OnTorqueProcessed;
             _csvStorage = new TorqueStorageService();
