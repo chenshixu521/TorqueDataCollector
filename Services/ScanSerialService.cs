@@ -81,7 +81,7 @@ namespace TorqueDataCollector.Services
                 }
                 catch
                 {
-                    // 保证串口线程永不崩
+                    // 保证串口线程永不崩溃
                 }
             }
         }
