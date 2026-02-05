@@ -3,9 +3,9 @@ using System.Timers;
 
 namespace TorqueDataCollector.Services
 {
-    /// <summary>
-    /// 设备状态枚举
-    /// </summary>
+    
+    // 设备状态枚举
+    
     public enum DeviceStatus
     {
         Disconnected,  // 已断开
@@ -14,9 +14,9 @@ namespace TorqueDataCollector.Services
         Error          // 错误状态（重试次数超限）
     }
 
-    /// <summary>
-    /// 设备连接管理器：管理串口设备的连接、断线重连、心跳检测
-    /// </summary>
+   
+    // 设备连接管理器：管理串口设备的连接、断线重连、心跳检测
+    
     public class DeviceConnectionManager
     {
         private readonly ScanSerialService _scanService;
