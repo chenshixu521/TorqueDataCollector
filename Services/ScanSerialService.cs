@@ -7,13 +7,16 @@ using System.Windows.Forms;
 
 namespace TorqueDataCollector.Services
 {
-    internal class ScanSerialService
+    public class ScanSerialService
     {
         private SerialPort _serialPort;
         private StringBuilder _buffer = new StringBuilder();
 
         //扫码完成事件
         public event Action<string> OnScanReceived;
+        //数据接收事件
+        public event Action OnDataReceived;
+
 
         public bool IsOpen
         {
@@ -52,6 +55,7 @@ namespace TorqueDataCollector.Services
             try
             {
                 string data = _serialPort.ReadExisting();
+                OnDataReceived?.Invoke();
                 if (string.IsNullOrWhiteSpace(data))
                     return;
 

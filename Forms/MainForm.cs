@@ -20,6 +20,7 @@ namespace TorqueDataCollector
         private TorqueCollectService _torqueCollectService;
         private TorqueStorageService _csvStorage;
         private TorqueSqlStorageService _sqlStorage;
+        private DeviceConnectionManager _scanDeviceManager;
 
 
 
@@ -35,6 +36,14 @@ namespace TorqueDataCollector
     ConfigurationManager.ConnectionStrings["TorqueDb"].ConnectionString;
 
             _sqlStorage = new TorqueSqlStorageService(connStr);
+
+            string portName = ConfigurationManager.AppSettings["ScanPortName"];
+            int baudRate = int.Parse(ConfigurationManager.AppSettings["ScanBaudRate"]);
+
+            _scanDeviceManager =
+                new DeviceConnectionManager(_scanService, portName, baudRate);
+
+            _scanDeviceManager.OnStatusChanged += ScanDevice_OnStatusChanged;
 
         }
         private void ScanService_OnScanReceived(string qr)
@@ -74,6 +83,34 @@ namespace TorqueDataCollector
 
             }));
         }
+        private void ScanDevice_OnStatusChanged(DeviceStatus status)
+        {
+            this.Invoke(new Action(() =>
+            {
+                switch (status)
+                {
+                    case DeviceStatus.Connecting:
+                        lblScanStatus.Text = "扫码枪：正在连接...";
+                        break;
+
+                    case DeviceStatus.Connected:
+                        lblScanStatus.Text = "扫码枪：已连接";
+                        break;
+
+                    case DeviceStatus.Disconnected:
+                        lblScanStatus.Text = "扫码枪：已断开，重试中";
+                        break;
+
+                    case DeviceStatus.Error:
+                        lblScanStatus.Text = "扫码枪：连接失败";
+                        MessageBox.Show(
+                            "扫码枪多次连接失败，请检查设备。",
+                            "设备错误");
+                        break;
+                }
+            }));
+        }
+
 
         private void btnBindMotor_Click(object sender, EventArgs e)
         {
@@ -106,26 +143,7 @@ namespace TorqueDataCollector
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                string portName = ConfigurationManager.AppSettings["ScanPortName"];
-                string baud = ConfigurationManager.AppSettings["ScanBaudRate"];
-
-                if (!int.TryParse(baud, out int baudRate))
-                {
-                    MessageBox.Show("串口波特率配置错误");
-                    return;
-                }
-
-                _scanService.Open(portName, baudRate);
-                lblScanStatus.Text = $"扫码枪已连接（{portName}）";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "扫码枪串口打开失败，请检查端口号是否正确或设备是否插入。\n\n" + ex.Message,
-                    "串口错误");
-            }
+            _scanDeviceManager.Start();
         }
     }
 }
